@@ -1,3 +1,3 @@
 export abstract class BaseApp {
-  public listen?: () => Promise<void>
+  public static listen?: () => Promise<void>
 }

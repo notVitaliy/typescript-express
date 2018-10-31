@@ -1,9 +1,7 @@
 import { Router as ExpressRouter } from 'express'
-import { RouterOptions } from '../interfaces/router-options'
+import { RouterOptions } from '../interfaces'
 
 export const Router = (path: string) => <T extends { new (...args: any[]): {} }>(constructor: T & RouterOptions) => {
-  const router = ExpressRouter({ mergeParams: true })
   constructor.path = path
-  constructor.router = router
-  constructor.prototype.router = router
+  constructor.prototype.router = constructor.router = ExpressRouter({ mergeParams: true })
 }

@@ -1,18 +1,22 @@
-import express from 'express'
+import express, { Express, Handler } from 'express'
 import { BaseRouter } from '../base-router'
 
 interface ExpressAppOptions {
   port: number
-  routers: typeof BaseRouter[]
+  routers?: typeof BaseRouter[]
+  middleware?: ((...args: any[]) => Handler)[]
 }
 
-export const ExpressApp = ({ routers, port }: ExpressAppOptions) => <T extends { new (...args: any[]): {} }>(
+export const ExpressApp = ({ port, routers, middleware }: ExpressAppOptions) => <T extends { new (...args: any[]): {} }>(
   constructor: T & {
     listen?: () => Promise<void>
+    router?: Express
   }
 ) => {
-  const app = express()
-  routers.forEach((router) => app.use(router.path, router.router))
+  const app = (constructor.prototype.router = express())
 
-  constructor.prototype.listen = () => new Promise<void>((resolve) => app.listen(port, () => resolve()))
+  if (middleware && Array.isArray(middleware)) middleware.forEach((middle) => app.use(middle()))
+  if (routers && Array.isArray(routers)) routers.forEach(({ path, router }) => app.use(path, router))
+
+  constructor.listen = () => new Promise<void>((resolve) => app.listen(port, () => resolve()))
 }

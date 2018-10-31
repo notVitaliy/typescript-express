@@ -10,6 +10,8 @@
     "experimentalDecorators": true,
     "baseUrl": ".",
     "outDir": "./dist",
-    "rootDir": "./src"
-  }
+    "rootDir": "./src",
+    "declaration": true
+  },
+  "exclude": ["./src/example", "./dist"]
 }
