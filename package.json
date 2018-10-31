@@ -1,13 +1,13 @@
 {
   "name": "typescript-express",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of decorators for express.",
   "license": "MIT",
   "author": {
     "name": "notVitaliy",
     "url": "https://vitaliy.codes"
   },
-  "repository": "notVitaliy/express-typescript",
+  "repository": "notVitaliy/typescript-express",
   "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",

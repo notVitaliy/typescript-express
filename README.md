@@ -1,4 +1,4 @@
-# `express-typescript`
+# `typescript-express`
 
 A collection of decorators for express.
 
@@ -8,11 +8,11 @@ _This project is in development. Use at your own risk._
 
 ### Instalation
 
-`express-typescript` requires [express](https://github.com/expressjs/express/)
+`typescript-express` requires [express](https://github.com/expressjs/express/)
 
 ```
 yarn add express
-yarn add express-typescript
+yarn add typescript-express
 ```
 
 Your `tsconfig.json` needs the following flags:
@@ -30,7 +30,7 @@ There are several decorators provided:
 This will create a server that listens on port 3000.
 
 ```typescript
-import { ExpressApp, BaseApp } from 'express-typescript'
+import { ExpressApp, BaseApp } from 'typescript-express'
 
 @ExpressApp({ port: 3000 })
 class App extends BaseApp {}
@@ -44,7 +44,7 @@ Middleware can be added at the top level `@ExpressApp`. Currently custom middlew
 
 ```typescript
 import express from 'express'
-import { ExpressApp, BaseApp } from 'express-typescript'
+import { ExpressApp, BaseApp } from 'typescript-express'
 
 @ExpressApp({
   port: 3000,
@@ -60,7 +60,7 @@ App.listen()
 Asynchronous methods are automatically resolved when using `async/await` or a `Promise` is returned by the decorated function. Whatever value is returned from a decorated method will be piped into `res.send()`. In a future release returning a `[number, string]` tuple will allow setting custom http status codes.
 
 ```typescript
-import { ExpressApp, BaseApp, Get } from 'express-typescript'
+import { ExpressApp, BaseApp, Get } from 'typescript-express'
 
 @ExpressApp({ port: 3000 })
 class App extends BaseApp {
@@ -76,7 +76,7 @@ App.listen()
 #### Extracting params/query/body properties
 
 ```typescript
-import { ExpressApp, BaseApp, Get, Post } from 'express-typescript'
+import { ExpressApp, BaseApp, Get, Post } from 'typescript-express'
 
 interface GetUserProps {
   query: {
@@ -159,7 +159,7 @@ _It's generally a bad idea to destructure the props in the function arguments as
 Routers have a similar API to `@ExpressApp`
 
 ```typescript
-import { ExpressApp, BaseApp, Get, Router, BaseRouter } from 'express-typescript'
+import { ExpressApp, BaseApp, Get, Router, BaseRouter } from 'typescript-express'
 
 @Router('/foo')
 class FooRouter extends BaseRouter {
@@ -196,4 +196,4 @@ Class method decorators cannot currently mutate the signature of a method. This 
 - Custom `@Middleware` decorator
 - `@Static` decorator
 
-©️ Vitaliy Isikov
+©️ Vitaliy
